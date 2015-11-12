@@ -7,6 +7,14 @@
 * The check for the output filename incorrectly uses the regex `^[A-z]+$` which matches everything in the ASCII table between A and z. This includes some symbols such as backslashes. On a Windows machine this could potentially be exploited to perform a directory traversal
 * Output file is not checked if it's a symlink, or the executable itself.
 
+#### Java version
+
+- Input/output file paths
+  * are not checked for symlinks
+- They write the salt to an output file and write each byte with a newline appended (`salt[i] + "\n"`). This results in the byte being converted to a string, which *really* reduces the keyspace if the salt would ever need to be brute forced. Entropy is reduced anyways since the salt is read back in from the `salt.bin` file and bytes are read instead of reading each line and converting to a byte. i.e. instead of reading bytes in the range of 0-255, they read any character in `[\.0-9\-\\n]` (ASCII digits, dot, and newline).
+- Password and salt are concated directly together and then hashed. Instead, the following operation should be performed: `hash(password + hash(salt))`
+- IF a fixed-length hash size was used then hashes would have a high chance of collision for the same reason as the salt.
+
 
 -----
 ## Dynamic Duo
