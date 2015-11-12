@@ -1,3 +1,12 @@
+## Giang Bui's Team
+
+#### C version
+
+* Does not to integer overflow detection (part of the assignment requirements -- however no actual operations are done on the integers)
+  * Never converts the input integer to an actual int, but has a fixed-length buffer of size 12 which leads me to believe that they took the number of digits possible in an int32 + the minus sign (11 chars total, + 1 for null terminator)
+* The check for the output filename incorrectly uses the regex `^[A-z]+$` which matches everything in the ASCII table between A and z. This includes some symbols such as backslashes. On a Windows machine this could potentially be exploited to perform a directory traversal
+* Output file is not checked if it's a symlink, or the executable itself.
+
 
 -----
 ## Dynamic Duo
