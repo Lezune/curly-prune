@@ -35,6 +35,8 @@
 
 ####C version
 * allows entry of 2147483647 for integer which multiplies and adds to 0 without error
+  - Should check `errno` after call to `strtol` to see if an error was encountered
+  - Use `<limits.h>` instead of your own defines to ensure that the limits are consistent on every platform
 * all entries can be blank and the program reports no errors (errors show up in error log)
 * program segfaults if "input.txt" is not present and no input filename is entered. 
 * negative input of -2147483646 will crash the program
