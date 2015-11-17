@@ -81,5 +81,24 @@ _not available_
 * does not accept negative integers
 ![invalid integer](file:///Users/ben/Pictures/Screenshots/Screen%20Shot%202015-11-11%20at%202.40.42%20PM.png)
 * uses MD5, a broken hash function since ~2005
+* Password verification leaks memory (potential DOS)
+![memory leak](file:///Users/ben/Pictures/Screenshots/Screen%20Shot%202015-11-12%20at%2011.15.29%20AM.png)
 
 #### Java version 
+* program crashes if input file is too large and does not contain new lines
+	* `ln -s /dev/zero input.txt`
+* Regex is applied to filename before opening file, symlinks can bypass this check easily
+
+-----
+
+## Team Tim Unger, Will Czifro, Sam Gronhovd
+
+####C version
+* can't compile right now
+
+
+#### Java version
+* program accepts pipe characters for name input
+* program crashes when trying to read large input file with no newlines (/dev/zero)
+* does not resolve file path of input file before validating (requirements easily bypassed by symlinking)
+* 
