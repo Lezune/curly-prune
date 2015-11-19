@@ -20,12 +20,14 @@
 ## Dynamic Duo
 
 #### C version
-* validatePassword function is vulnerable to timing attacks
+* validatePassword function is vulnerable to timing attacks (lander note: not relevant)
 * multiplication does not check for overflow
 * addition function does not check for overflow
 * validateInt can be broken with input such as "000-000"
-
-
+* uses `crypt()` which is insecure
+* use of `rand()` in a cryptographic context
+	* `rand()` is never seeded, resulting in the same salt every time
+* `generateSalt()` takes a size, which in the context of password hashing is the same size as the buffer. The buffer is then written to an output file using `fprintf(storage, "%s\n", salt)`. The problem is that `generateSalt()` fills the entire buffer with characters, and does not leave a null terminator. While from what I tested this does not show to be exploitable, it could be under the right conditions.
 
 #### Java Version
 * password verification function compares passwords before hashing
