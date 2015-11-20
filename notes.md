@@ -104,3 +104,5 @@ _not available_
 * program crashes when trying to read large input file with no newlines (/dev/zero)
 * does not resolve file path of input file before validating (requirements easily bypassed by symlinking)
 * 
+
+* 
